@@ -1,0 +1,7 @@
+`verilator_config
+// the vendored tv80: its own style, left as upstream
+lint_off -file "*/modules/cpu-tv80/*"
+// the vendored fx68k, jt12 / jt10 and jt49: their own style, left as upstream
+lint_off -file "*/modules/fx68k/*"
+lint_off -file "*/modules/jt12/*"
+lint_off -file "*/modules/jt49/*"

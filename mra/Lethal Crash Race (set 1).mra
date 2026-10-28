@@ -1,0 +1,89 @@
+<misterromdescription>
+    <name>Lethal Crash Race (set 1)</name>
+    <setname>crshrace</setname>
+    <mameversion>0289</mameversion>
+    <year>1993</year>
+    <manufacturer>Video System Co.</manufacturer>
+    <players>2</players>
+    <joystick>8</joystick>
+    <rotation>vertical (ccw)</rotation>
+    <rbf>crashrace</rbf>
+    <platform>Crash Race</platform>
+
+    <!--
+      The image of the Crash Race core (rtl/crshrace_loader.sv, tools/crshrace_rom.py), MAME's regions in MAME's byte order (the
+      ROM_LOAD16_WORD_SWAP ROMs swapped back by a one-part interleave), the same layout for every set:
+        0x000000  0x080000  maincpu    the 68000's program
+        0x080000  0x100000  user1      its data ROM at 300000
+        0x180000  0x100000  user2      its data ROM at 400000
+        0x280000  0x020000  audiocpu   the Z80's program and its banks
+        0x2A0000  0x100000  chars      the 8 x 8 x 8 char layer
+        0x3A0000  0x300000  tiles      the K053936 layer's 16 x 16 tiles
+        0x6A0000  0x400000  sprites    the sprites
+        0xAA0000  0x100000  adpcmb     the YM2610's ADPCM-B samples
+        0xBA0000  0x100000  adpcma     its ADPCM-A samples
+      Expects the MAME 0.289 merged romset or the split sets: parts are found by name and CRC. The md5 is MiSTer's (of the parts'
+      bytes as read, before the interleave; the image itself is 3fbc2e78fd8bbfd912fac88d6849e4a6).
+      address= is the fast load: a recent Main_MiSTer copies the image into the DDR3 at that byte and the core reads it from there
+      (rtl/crshrace_fastload.sv); an older one streams it.
+    -->
+
+    <!--
+      DIP switches (ioctl index 254), a 1 is "off", bit for bit as MAME reads them: byte 0 is DSW0's bits 7:0 (SW2), byte 1 its bits
+      15:8 (SW1), byte 2 DSW1 (SW3), byte 3 the region (DSW2's bits 11:8; a board setting, not a switch). MAME's defaults: FF, FF,
+      FF, 01. The game's Flip Screen switch (SW2:1) is the OSD's Flip Screen and its service switch (SW2:4) the OSD's Service Mode.
+    -->
+    <switches default="FF,FF,FF,01" base="16">
+        <dip bits="1"     name="Demo Sounds" ids="Off,On"/>
+        <dip bits="2"     name="Free Play" ids="On,Off"/>
+        <dip bits="6,7"   name="Difficulty" ids="Hardest,Hard,Easy,Normal"/>
+        <dip bits="8"     name="Coin Slot" ids="Individual,Same"/>
+        <dip bits="9,11"  name="Coin A" ids="1C/6C,1C/5C,1C/4C,1C/3C,1C/2C,3C/1C,2C/1C,1C/1C"/>
+        <dip bits="12,14" name="Coin B (Coin Slot: Same)" ids="1C/6C,1C/5C,1C/4C,1C/3C,1C/2C,3C/1C,2C/1C,1C/1C"/>
+        <dip bits="15"    name="2 to Start, 1 to Cont." ids="On,Off"/>
+        <dip bits="23"    name="Reset on P.O.S.T. Error" ids="No,Yes"/>
+        <dip bits="24,27" name="Region" ids="Japan,World,Korea,Hong Kong &amp; Taiwan,USA &amp; Canada" values="0,1,2,4,8"/>
+    </switches>
+
+    <!-- the buttons as the game names them (MAME's notes and the cabinet's panel): button 1 accelerates, button 2 brakes -->
+    <buttons names="Accel,Brake,Start,Coin" default="A,B,Start,Select"/>
+
+    <rom index="0" zip="crshrace.zip" md5="1d6daaa93948981385c6b051fa443678" address="0x32000000">
+        <!-- maincpu (ROM_LOAD16_WORD_SWAP: the bytes of each word swapped) -->
+        <interleave output="16">
+            <part name="1.ic10" crc="21e34fb7" map="12"/>
+        </interleave>
+        <!-- user1 (ROM_LOAD16_WORD_SWAP: the bytes of each word swapped) -->
+        <interleave output="16">
+            <part name="w21.ic14" crc="a5df7325" map="12"/>
+        </interleave>
+        <!-- user2 (ROM_LOAD16_WORD_SWAP: the bytes of each word swapped) -->
+        <interleave output="16">
+            <part name="w22.ic13" crc="fc9d666d" map="12"/>
+        </interleave>
+        <!-- audiocpu -->
+        <part name="2.ic58" crc="e70a900f"/>
+        <!-- chars -->
+        <part name="h895.ic50" crc="36ad93c3"/>
+        <!-- tiles (ROM_LOAD16_WORD_SWAP: the bytes of each word swapped) -->
+        <interleave output="16">
+            <part name="w18.rom-a" crc="b15df90d" map="12"/>
+        </interleave>
+        <!-- tiles (ROM_LOAD16_WORD_SWAP: the bytes of each word swapped) -->
+        <interleave output="16">
+            <part name="w19.rom-b" crc="28326b93" map="12"/>
+        </interleave>
+        <!-- tiles (ROM_LOAD16_WORD_SWAP: the bytes of each word swapped) -->
+        <interleave output="16">
+            <part name="w20.rom-c" crc="d4056ad1" map="12"/>
+        </interleave>
+        <!-- sprites -->
+        <part name="h897.ic29" crc="e3230128"/>
+        <!-- sprites -->
+        <part name="h896.ic75" crc="fff60233"/>
+        <!-- adpcmb -->
+        <part name="h894.ic73" crc="d53300c1"/>
+        <!-- adpcma -->
+        <part name="h893.ic69" crc="32513b63"/>
+    </rom>
+</misterromdescription>

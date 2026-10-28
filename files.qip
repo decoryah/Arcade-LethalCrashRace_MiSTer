@@ -1,0 +1,104 @@
+set_global_assignment -name SYSTEMVERILOG_FILE CrashRace.sv
+set_global_assignment -name SDC_FILE CrashRace.sdc
+set_global_assignment -name QIP_FILE rtl/pll.qip
+
+# the machine
+set_global_assignment -name SEARCH_PATH rtl
+set_global_assignment -name SYSTEMVERILOG_FILE rtl/crshrace_ram.sv
+set_global_assignment -name SYSTEMVERILOG_FILE rtl/crshrace_core.sv
+set_global_assignment -name SYSTEMVERILOG_FILE rtl/crshrace_video.sv
+set_global_assignment -name SYSTEMVERILOG_FILE rtl/crshrace_chars.sv
+set_global_assignment -name SYSTEMVERILOG_FILE rtl/crshrace_roz.sv
+set_global_assignment -name SYSTEMVERILOG_FILE rtl/crshrace_sprites.sv
+set_global_assignment -name SYSTEMVERILOG_FILE rtl/crshrace_sound.sv
+set_global_assignment -name SYSTEMVERILOG_FILE rtl/crshrace_cache.sv
+
+# the MiSTer platform layer
+set_global_assignment -name SYSTEMVERILOG_FILE rtl/crshrace_sdram.sv
+set_global_assignment -name SYSTEMVERILOG_FILE rtl/crshrace_loader.sv
+set_global_assignment -name SYSTEMVERILOG_FILE rtl/crshrace_fastload.sv
+
+# fx68k (GPL-3.0-or-later, Jorge Cwik; modules/VENDOR.md): its microcode ROMs microrom.mem / nanorom.mem are read from its folder
+set_global_assignment -name SEARCH_PATH modules/fx68k
+set_global_assignment -name SYSTEMVERILOG_FILE modules/fx68k/fx68k.sv
+set_global_assignment -name SYSTEMVERILOG_FILE modules/fx68k/fx68kAlu.sv
+set_global_assignment -name SYSTEMVERILOG_FILE modules/fx68k/uaddrPla.sv
+
+# tv80 (MIT, Guy Hutchison), with the clock-enable wrapper tv80s_cen.v (modules/VENDOR.md); TV80_REFRESH builds its R register,
+# which MAME's Z80 counts on every opcode fetch and interrupt
+set_global_assignment -name VERILOG_MACRO "TV80_REFRESH=1"
+set_global_assignment -name VERILOG_FILE modules/cpu-tv80/tv80_alu.v
+set_global_assignment -name VERILOG_FILE modules/cpu-tv80/tv80_core.v
+set_global_assignment -name VERILOG_FILE modules/cpu-tv80/tv80_mcode.v
+set_global_assignment -name VERILOG_FILE modules/cpu-tv80/tv80_reg.v
+set_global_assignment -name VERILOG_FILE modules/cpu-tv80/tv80s_cen.v
+
+# jt10, the YM2610 (GPL-3.0-or-later, Jose Tejada: modules/jt12, with the SSG from modules/jt49; modules/VENDOR.md)
+set_global_assignment -name SEARCH_PATH modules/jt12/hdl
+set_global_assignment -name VERILOG_FILE modules/jt12/hdl/jt10.v
+set_global_assignment -name VERILOG_FILE modules/jt12/hdl/jt10b.v
+set_global_assignment -name VERILOG_FILE modules/jt12/hdl/jt10b_mixer.v
+set_global_assignment -name VERILOG_FILE modules/jt12/hdl/jt12_rst.v
+set_global_assignment -name VERILOG_FILE modules/jt12/hdl/jt12_mmr.v
+set_global_assignment -name VERILOG_FILE modules/jt12/hdl/jt12_top.v
+set_global_assignment -name VERILOG_FILE modules/jt12/hdl/jt12_acc.v
+set_global_assignment -name VERILOG_FILE modules/jt12/hdl/jt12_single_acc.v
+set_global_assignment -name VERILOG_FILE modules/jt12/hdl/jt12_eg.v
+set_global_assignment -name VERILOG_FILE modules/jt12/hdl/jt12_eg_cnt.v
+set_global_assignment -name VERILOG_FILE modules/jt12/hdl/jt12_eg_comb.v
+set_global_assignment -name VERILOG_FILE modules/jt12/hdl/jt12_eg_step.v
+set_global_assignment -name VERILOG_FILE modules/jt12/hdl/jt12_eg_pure.v
+set_global_assignment -name VERILOG_FILE modules/jt12/hdl/jt12_eg_final.v
+set_global_assignment -name VERILOG_FILE modules/jt12/hdl/jt12_eg_ctrl.v
+set_global_assignment -name VERILOG_FILE modules/jt12/hdl/jt12_exprom.v
+set_global_assignment -name VERILOG_FILE modules/jt12/hdl/jt12_kon.v
+set_global_assignment -name VERILOG_FILE modules/jt12/hdl/jt12_lfo.v
+set_global_assignment -name VERILOG_FILE modules/jt12/hdl/jt12_div.v
+set_global_assignment -name VERILOG_FILE modules/jt12/hdl/jt12_mod.v
+set_global_assignment -name VERILOG_FILE modules/jt12/hdl/jt12_op.v
+set_global_assignment -name VERILOG_FILE modules/jt12/hdl/jt12_csr.v
+set_global_assignment -name VERILOG_FILE modules/jt12/hdl/jt12_pg.v
+set_global_assignment -name VERILOG_FILE modules/jt12/hdl/jt12_pg_inc.v
+set_global_assignment -name VERILOG_FILE modules/jt12/hdl/jt12_pg_dt.v
+set_global_assignment -name VERILOG_FILE modules/jt12/hdl/jt12_pg_sum.v
+set_global_assignment -name VERILOG_FILE modules/jt12/hdl/jt12_pg_comb.v
+set_global_assignment -name VERILOG_FILE modules/jt12/hdl/jt12_pm.v
+set_global_assignment -name VERILOG_FILE modules/jt12/hdl/jt12_logsin.v
+set_global_assignment -name VERILOG_FILE modules/jt12/hdl/jt12_reg.v
+set_global_assignment -name VERILOG_FILE modules/jt12/hdl/jt12_reg_ch.v
+set_global_assignment -name VERILOG_FILE modules/jt12/hdl/jt12_sh.v
+set_global_assignment -name VERILOG_FILE modules/jt12/hdl/jt12_sh_rst.v
+set_global_assignment -name VERILOG_FILE modules/jt12/hdl/jt12_sh24.v
+set_global_assignment -name VERILOG_FILE modules/jt12/hdl/jt12_sumch.v
+set_global_assignment -name VERILOG_FILE modules/jt12/hdl/jt12_timers.v
+set_global_assignment -name VERILOG_FILE modules/jt12/hdl/jt12_pcm.v
+set_global_assignment -name VERILOG_FILE modules/jt12/hdl/jt12_dout.v
+set_global_assignment -name VERILOG_FILE modules/jt12/hdl/jt10_acc.v
+set_global_assignment -name VERILOG_FILE modules/jt12/hdl/mixer/jt12_genmix.v
+set_global_assignment -name VERILOG_FILE modules/jt12/hdl/mixer/jt12_decim.v
+set_global_assignment -name VERILOG_FILE modules/jt12/hdl/mixer/jt12_interpol.v
+set_global_assignment -name VERILOG_FILE modules/jt12/hdl/mixer/jt12_comb.v
+set_global_assignment -name VERILOG_FILE modules/jt12/hdl/mixer/jt12_fm_uprate.v
+set_global_assignment -name VERILOG_FILE modules/jt12/hdl/adpcm/jt10_adpcm.v
+set_global_assignment -name VERILOG_FILE modules/jt12/hdl/adpcm/jt10_adpcm_acc.v
+set_global_assignment -name VERILOG_FILE modules/jt12/hdl/adpcm/jt10_adpcma_lut.v
+set_global_assignment -name VERILOG_FILE modules/jt12/hdl/adpcm/jt10_adpcmb.v
+set_global_assignment -name VERILOG_FILE modules/jt12/hdl/adpcm/jt10_adpcmb_cnt.v
+set_global_assignment -name VERILOG_FILE modules/jt12/hdl/adpcm/jt10_adpcmb_gain.v
+set_global_assignment -name VERILOG_FILE modules/jt12/hdl/adpcm/jt10_adpcm_cnt.v
+set_global_assignment -name VERILOG_FILE modules/jt12/hdl/adpcm/jt10_adpcm_dbrom.v
+set_global_assignment -name VERILOG_FILE modules/jt12/hdl/adpcm/jt10_adpcm_drvA.v
+set_global_assignment -name VERILOG_FILE modules/jt12/hdl/adpcm/jt10_adpcm_drvB.v
+set_global_assignment -name VERILOG_FILE modules/jt12/hdl/adpcm/jt10_adpcm_gain.v
+set_global_assignment -name VERILOG_FILE modules/jt12/hdl/adpcm/jt10_cen_burst.v
+set_global_assignment -name VERILOG_FILE modules/jt12/hdl/adpcm/jt10_adpcm_div.v
+set_global_assignment -name VERILOG_FILE modules/jt12/hdl/adpcm/jt10_adpcmb_interpol.v
+set_global_assignment -name VERILOG_FILE modules/jt49/hdl/jt49.v
+set_global_assignment -name VERILOG_FILE modules/jt49/hdl/jt49_div.v
+set_global_assignment -name VERILOG_FILE modules/jt49/hdl/jt49_eg.v
+set_global_assignment -name VERILOG_FILE modules/jt49/hdl/jt49_exp.v
+set_global_assignment -name VERILOG_FILE modules/jt49/hdl/jt49_noise.v
+set_global_assignment -name VERILOG_FILE modules/jt49/hdl/jt49_cen.v
+
+# rmonic79's CRT Adjust (GPL-3.0-or-later, modules/VENDOR.md)
+set_global_assignment -name SYSTEMVERILOG_FILE modules/crt-adjust/crt_adjust.sv
