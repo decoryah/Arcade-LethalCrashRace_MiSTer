@@ -4,7 +4,7 @@
 //
 // The memories (the 68000's side, at its addresses in rtl/crshrace_core.sv): sprite RAM 1 a00000 (32 K words: the VS9210's tile
 // table), VRAM 0 d00000 (4 K words: the K053936 layer's 64 x 64 tiles), sprite RAM 0 e00000 (4 K words: the VS9108's list and
-// attributes), VRAM 1 ffd000 (2 K words: the char layer), the palette ffe000 (2 K words, xBBBBBGGGGGRRRRR). Each is kept twice:
+// attributes), VRAM 1 ffd000 (2 K words: the char layer), the palette ffe000 (2 K words, xGGGGGBBBBBRRRRR). Each is kept twice:
 // the live copy the CPU reads and writes, and the display copy the picture is drawn from; the registers (gfxctrl fff001, the
 // K053936 layer's tile bank ffc001, the K053936's control words fff020-fff03f) likewise.
 //
