@@ -8,7 +8,7 @@ set 2 and set 2 with the alternate sound ROM.
 
 ### Install
 
-1. Unzip `CrashRace_MiSTer_20261028.zip` over the root of the SD card. It adds `Lethal Crash Race (set 1).mra` to `_Arcade/`,
+1. Unzip `LethalCrashRace_MiSTer_20261028.zip` over the root of the SD card. It adds `Lethal Crash Race (set 1).mra` to `_Arcade/`,
    `Lethal Crash Race (set 2).mra` and `Lethal Crash Race (set 2, alternate sound ROM).mra` to `_Arcade/_alternatives/_Crash Race/`
    and `_Arcade/cores/crashrace_20261028.rbf`.
 2. Put your own MAME 0.289 romset `crshrace.zip` (the merged set holds all three versions) in `games/mame/`. No ROMs are included.

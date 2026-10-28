@@ -22,7 +22,7 @@ on the HDMI clock). **Release 20261028. Not yet tested on a real MiSTer.**
 
 ## Install
 
-1. Unzip `CrashRace_MiSTer_<date>.zip` (`tools/package.py` writes it to `dist/`) over the root of the SD card (`/media/fat/`): the
+1. Unzip `LethalCrashRace_MiSTer_<date>.zip` (`tools/package.py` writes it to `dist/`) over the root of the SD card (`/media/fat/`): the
    core goes to `_Arcade/cores/`, `Lethal Crash Race (set 1).mra` to `_Arcade/` and set 2's two MRAs to
    `_Arcade/_alternatives/_Crash Race/`. (By hand from the repository: `releases/crashrace_<date>.rbf` to `_Arcade/cores/`, the
    contents of `mra/` to `_Arcade/`. Keep the RBF's `crashrace_` name: MiSTer finds the core by the MRA's `<rbf>`.)
@@ -106,7 +106,7 @@ Quartus Prime Lite 17.0:
     quartus_sh --flow compile CrashRace
 
 Copy `output_files/CrashRace.rbf` to `releases/crashrace_<YYYYMMDD>.rbf` (a later build of the same day: `<YYYYMMDD>b`, ...);
-`python3 tools/package.py` then writes the SD card zip (`dist/CrashRace_MiSTer_<YYYYMMDD>.zip`).
+`python3 tools/package.py` then writes the SD card zip (`dist/LethalCrashRace_MiSTer_<YYYYMMDD>.zip`).
 
 The benches need Verilator 5 (in WSL), Python 3 and your romset:
 
